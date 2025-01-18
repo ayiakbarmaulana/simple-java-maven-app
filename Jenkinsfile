@@ -14,8 +14,10 @@ node {
 
     stage('Deploy') {
       sh './jenkins/scripts/deliver.sh'
-      sleep(time: 5, unit: 'SECONDS')
-      input message: 'Aplikasi telah berjalan selama 5 detik. Apakah Anda ingin melanjutkan?'
+      sleep(time: 30, unit: 'SECONDS')
+      input message: 'Aplikasi telah berjalan selama 30 detik. Apakah Anda ingin melanjutkan? (Click "Proceed" to continue)'
+
+      sh ('./jenkins/scripts/kill.sh')
     }
   }
 }
