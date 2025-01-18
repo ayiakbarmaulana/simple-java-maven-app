@@ -17,6 +17,7 @@ node {
       sleep(time: 30, unit: 'SECONDS')
       input message: 'Aplikasi telah berjalan selama 30 detik. Apakah Anda ingin melanjutkan? (Click "Proceed" to continue)'
 
+      sh 'chmod +x ./jenkins/scripts/kill.sh'
       sh ('./jenkins/scripts/kill.sh')
     }
   }
