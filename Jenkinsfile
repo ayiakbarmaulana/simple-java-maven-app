@@ -12,8 +12,10 @@ node {
       junit 'target/surefire-reports/*.xml'
   }
 
-    stage('Deliver') {
+    stage('Deploy') {
       sh './jenkins/scripts/deliver.sh'
+      sleep(time: 5, unit: 'SECONDS')
+      input message: 'Aplikasi telah berjalan selama 5 detik. Apakah Anda ingin melanjutkan?'
     }
   }
 }
