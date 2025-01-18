@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 APP_NAME="my-app-1.0-SNAPSHOT.jar"
 
@@ -12,5 +12,6 @@ else
     echo "Menghentikan aplikasi ${APP_NAME} dengan PID: ${PID}..."
     kill -9 ${PID}
     echo "Aplikasi ${APP_NAME} dihentikan."
-    set +x
 fi
+
+set +x
