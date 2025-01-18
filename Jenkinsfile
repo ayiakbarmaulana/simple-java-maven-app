@@ -13,18 +13,13 @@ node {
   }
 
     stage("Manual Approval") {
-      input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', parameters: [choice(name: 'Action', choices: ['Proceed', 'Abort'], description: 'Pilih untuk melanjutkan atau menghentikan')]
-      script {
-        if (params.Action == 'Abort') {
-          error 'Pipeline dihentikan oleh pengguna.'
-        }
-      }
+      input message: 'Lanjutkan ke tahap Deploy?'
     }
 
     stage('Deploy') {
       sh './jenkins/scripts/deliver.sh'
       sleep(time: 60, unit: 'SECONDS')
-      
+
       sh 'chmod +x ./jenkins/scripts/kill.sh'
       sh ('./jenkins/scripts/kill.sh')
     }
