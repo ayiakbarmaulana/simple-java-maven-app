@@ -12,11 +12,19 @@ node {
       junit 'target/surefire-reports/*.xml'
   }
 
+    stage("Manual Approval") {
+      input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', parameters: [choice(name: 'Action', choices: ['Proceed', 'Abort'], description: 'Pilih untuk melanjutkan atau menghentikan')]
+      script {
+        if (params.Action == 'Abort') {
+          error 'Pipeline dihentikan oleh pengguna.'
+        }
+      }
+    }
+
     stage('Deploy') {
       sh './jenkins/scripts/deliver.sh'
-      sleep(time: 30, unit: 'SECONDS')
-      input message: 'Aplikasi telah berjalan selama 30 detik. Apakah Anda ingin melanjutkan? (Click "Proceed" to continue)'
-
+      sleep(time: 60, unit: 'SECONDS')
+      
       sh 'chmod +x ./jenkins/scripts/kill.sh'
       sh ('./jenkins/scripts/kill.sh')
     }
