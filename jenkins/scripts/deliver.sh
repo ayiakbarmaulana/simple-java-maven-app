@@ -27,4 +27,4 @@ set +x
 
 sudo docker build -t maven-java-app .
 
-sudo docker start maven-java-app
+sudo docker run -d --name maven-java -p 8080:8080 maven-java-app
