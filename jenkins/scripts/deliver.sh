@@ -25,6 +25,8 @@ set +x
 # set -x
 # java -jar target/${NAME}-${VERSION}.jar
 
+USER root
+
 docker build -t maven-java-app .
 
 docker start maven-java-app
