@@ -4,6 +4,10 @@ node {
   stage('ssh') {
     sshagent(credentials: ['a54789ce-6d79-4114-a78c-1dff917fec83']) {
       sh '''
+        # Ensure the .ssh directory exists
+        mkdir -p ~/.ssh
+
+        # Add the EC2 instance to known_hosts
         echo "Adding EC2 instance to known_hosts"
         ssh-keyscan -H ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com >> ~/.ssh/known_hosts
       '''
