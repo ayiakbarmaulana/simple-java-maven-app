@@ -16,11 +16,8 @@ node {
       input message: 'Lanjutkan ke tahap Deploy?'
     }
 
-    stages {
     stage('Install SSH Tools') {
-      steps {
-        sh 'apt-get update && apt-get install -y openssh-client'
-      }
+      sh 'apt-get update && apt-get install -y openssh-client'
     }
 
     stage('Deploy') {
