@@ -2,7 +2,8 @@
 # Build stage
 #
 FROM maven:3.9.2 AS build
-COPY src /home/ubuntu/simple-java-maven-appsrc
+USER root
+COPY src /home/ubuntu/simple-java-maven-app/src
 COPY pom.xml /home/ubuntu/simple-java-maven-app
 RUN mvn -f /home/ubuntu/simple-java-maven-app/pom.xml clean package
 
