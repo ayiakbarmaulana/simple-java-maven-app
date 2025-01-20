@@ -8,12 +8,15 @@ node {
   remote.allowAnyHosts = true
 
   checkout scm
-  stage('Remote SSH') {
-    sshCommand remote: remote, command: "ls -lrt"
-    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
-  }
-  
+ 
+
   docker.image('maven:3.9.2').inside('-v /home/icama/.m2:/root/.m2 -u root') {
+
+    stage('Remote SSH') {
+      sshCommand remote: remote, command: "ls -lrt"
+      sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+    }
+    
     stage('Build') {
       sh 'mvn -B -DskipTests clean package'
     }
