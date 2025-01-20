@@ -31,4 +31,4 @@ set -x
 set +x
 echo 'Created images successfully'
 echo 'Starting to run maven-java-app images into container'
-sudo docker run -d --name maven-java maven-java-app
+sudo docker run -d maven-java-app
