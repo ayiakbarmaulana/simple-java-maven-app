@@ -17,7 +17,10 @@ node {
     }
 
     stage('Deploy') {
-      sh './jenkins/scripts/deliver.sh'
+      sh 'chmod 400 ./riasec_app.pem'
+      sh 'ssh -i "riasec_app.pem" ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com'
+
+      sh './simple-java-maven-app/jenkins/scripts/deliver.sh'
       sleep(time: 60, unit: 'SECONDS')
 
       sh 'chmod +x ./jenkins/scripts/kill.sh'
