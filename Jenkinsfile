@@ -52,8 +52,9 @@ node {
     stage("Manual Approval") {
       input message: 'Lanjutkan ke tahap Deploy?'
     }
+  }
 
-    stage('Deploy') {
+   stage('Deploy') {
       // Ensure the ssh-agent is initialized and running
       sshagent(credentials: ['a54789ce-6d79-4114-a78c-1dff917fec83']) {
         sh '''
@@ -74,5 +75,4 @@ node {
         sh './jenkins/scripts/kill.sh'
       }
     }
-  }
 }
