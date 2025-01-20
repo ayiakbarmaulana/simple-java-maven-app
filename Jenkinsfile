@@ -4,6 +4,8 @@ node {
   stage('ssh') {
     sshagent(['a54789ce-6d79-4114-a78c-1dff917fec83']) {
       echo "masuk ke dalam ec2 aws"
+      sh 'ssh -i "riasec_app.pem" ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com'
+      sh 'whoami'
       sh 'ls -lah'
     }
   }
@@ -22,13 +24,6 @@ node {
 
     stage("Manual Approval") {
       input message: 'Lanjutkan ke tahap Deploy?'
-    }
-
-    stage('Install SSH Tools & SetUp SSH') {
-      sh '''
-        apt-get update && apt-get install -y openssh-client
-        ssh-keyscan -H ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-      '''
     }
 
     stage('Deploy') {
