@@ -16,10 +16,21 @@ node {
       input message: 'Lanjutkan ke tahap Deploy?'
     }
 
+    stages {
+    stage('Install SSH Tools') {
+      steps {
+        sh 'apt-get update && apt-get install -y openssh-client'
+      }
+    }
+
     stage('Deploy') {
       sh 'chmod 400 ./riasec_app.pem'
       sh 'ssh -i "riasec_app.pem" ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com'
 
+      sh '''
+        cd ~/simple-java-maven-app
+        git pull
+      '''
       sh './simple-java-maven-app/jenkins/scripts/deliver.sh'
       sleep(time: 60, unit: 'SECONDS')
 
