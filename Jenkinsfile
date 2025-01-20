@@ -32,18 +32,17 @@ node {
     }
 
     stage('Deploy') {
-      sh 'chmod 400 ./riasec_app.pem'
-      sh 'ssh -i "riasec_app.pem" ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com'
-
+      sshagent(credentials: ['a54789ce-6d79-4114-a78c-1dff917fec83']) {
       sh '''
-        cd ~/simple-java-maven-app
-        git pull
-      '''
-      sh './simple-java-maven-app/jenkins/scripts/deliver.sh'
-      sleep(time: 60, unit: 'SECONDS')
+        # Ensure the .ssh directory exists
+        mkdir -p ~/.ssh
 
-      sh 'chmod +x ./jenkins/scripts/kill.sh'
-      sh ('./jenkins/scripts/kill.sh')
+        # Add the EC2 instance to known_hosts
+        echo "Adding EC2 instance to known_hosts"
+        ssh-keyscan -H ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+      '''
+      sh 'ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull && whoami && ls -lah && ./simple-java-maven-app/jenkins/scripts/deliver.sh && sleep(time: 60, unit: 'SECONDS') && chmod +x ./jenkins/scripts/kill.sh && ./jenkins/scripts/kill.sh"'
+      }
     }
   }
 }
