@@ -16,8 +16,11 @@ node {
       input message: 'Lanjutkan ke tahap Deploy?'
     }
 
-    stage('Install SSH Tools') {
-      sh 'apt-get update && apt-get install -y openssh-client'
+    stage('Install SSH Tools & SetUp SSH') {
+      sh '''
+        apt-get update && apt-get install -y openssh-client
+        ssh-keyscan -H ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+      '''
     }
 
     stage('Deploy') {
