@@ -18,7 +18,7 @@ node {
     }
 
     stage('Deliver') {
-        withCredentials([string(credentialsId: 'a54789ce-6d79-4114-a78c-1dff917fec83')]) {
+        sshagent(credentials: ['a54789ce-6d79-4114-a78c-1dff917fec83']) {
             sh './jenkins/scripts/deliver.sh'
         }
         sleep time: 1, unit: 'MINUTES'
