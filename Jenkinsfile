@@ -4,6 +4,7 @@ node {
   stage('ssh') {
     sshagent(credentials: ['a54789ce-6d79-4114-a78c-1dff917fec83']) {
       echo "masuk ke dalam ec2 aws"
+      sh 'ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull"'
       sh 'whoami'
       sh 'ls -lah'
     }
