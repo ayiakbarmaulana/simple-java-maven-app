@@ -11,10 +11,7 @@ node {
         echo "Adding EC2 instance to known_hosts"
         ssh-keyscan -H ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com >> ~/.ssh/known_hosts
       '''
-      echo "masuk ke dalam ec2 aws"
-      sh 'ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull"'
-      sh 'whoami'
-      sh 'ls -lah'
+      sh 'ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull && whoami && ls -lah"'
     }
   }
 
