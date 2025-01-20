@@ -17,12 +17,12 @@ node {
       input message: 'Lanjutkan ke tahap Deploy?'
     }
 
-    // stage('Deliver') {
-    //     withCredentials([string(credentialsId: 'a54789ce-6d79-4114-a78c-1dff917fec83')]) {
-    //         sh './jenkins/scripts/deliver.sh'
-    //     }
-    //     sleep time: 1, unit: 'MINUTES'
-    // }
+    stage('Deliver') {
+        withCredentials([string(credentialsId: 'a54789ce-6d79-4114-a78c-1dff917fec83')]) {
+            sh './jenkins/scripts/deliver.sh'
+        }
+        sleep time: 1, unit: 'MINUTES'
+    }
   }
 
   //  stage('Deploy') {
