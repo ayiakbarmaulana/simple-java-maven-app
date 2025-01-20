@@ -5,9 +5,11 @@ node {
   docker.image('maven:3.9.2').inside('-v /home/icama/.m2:/root/.m2 -u root') {
 
     stage('ssh') {
-      sshagent(credentials: ['2bb2c58d-0711-40dc-bed5-aed5e6f6c187']) {
-        echo "masuk ke dalam ec2 aws"
-        sh 'ls -lah'
+      steps {
+        sshagent(credentials: ['2bb2c58d-0711-40dc-bed5-aed5e6f6c187']) {
+          echo "masuk ke dalam ec2 aws"
+          sh 'ls -lah'
+        }
       }
     }
 
