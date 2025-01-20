@@ -67,7 +67,7 @@ node {
         '''
         sh '''
           echo "Deploying to EC2 instance"
-          ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull && whoami && ls -lah && ./simple-java-maven-app/jenkins/scripts/deliver.sh"
+          ssh ubuntu@ec2-13-215-173-108.ap-southeast-1.compute.amazonaws.com "cd ~/simple-java-maven-app && git pull && whoami && ls -lah && ./jenkins/scripts/deliver.sh"
         '''
         sleep(time: 60, unit: 'SECONDS')
 
