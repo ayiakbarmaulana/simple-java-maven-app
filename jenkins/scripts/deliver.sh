@@ -24,7 +24,11 @@ set +x
 # echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 # set -x
 # java -jar target/${NAME}-${VERSION}.jar
-
+echo 'The following command will build maven java app into images'
 sudo docker build -t maven-java-app .
+set -x
 
-sudo docker run -d --name maven-java -p 8080:8080 maven-java-app
+set +x
+echo 'Created images successfully'
+echo 'Starting to run maven-java-app images into container'
+sudo docker run -d --name maven-java maven-java-app
