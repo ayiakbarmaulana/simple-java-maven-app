@@ -25,6 +25,6 @@ set +x
 # set -x
 # java -jar target/${NAME}-${VERSION}.jar
 
-docker build -t maven-java-app .
+sudo docker build -t maven-java-app .
 
-docker start maven-java-app
+sudo docker start maven-java-app
